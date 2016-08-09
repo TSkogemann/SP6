@@ -1,0 +1,97 @@
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Angular js scripts-->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src="app/app.js"></script>
+        <!-- angular routing -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: inline-block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover {
+                background-color: #111;
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <ul>
+            <li><a class="active" href= "#allPersons">All persons</a></li>
+            <li><a href="#newPerson">Create new person</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <div ng-app = "mainApp">
+            <div ng-view></div>
+
+            <script type = "text/ng-template" id = "allPersons.html">
+                <h1> Person List</h1>
+                <table>
+                <tr>
+                <td><a>Name</a></td>
+                <td><a>ID</a></td>
+                </tr>
+                <tr ng-repeat="value in persons">
+                <td><a href="#showPerson" ng-click="clicked(value)">{{ value.id}}</a></td>
+                <td>{{ value.name}}</td>
+                </tr>
+                </table>
+
+            </script>
+            <script type = "text/ng-template" id = "showPerson.html">
+                <h2> Person details </h2>
+
+                ID: {{personService.selectedPerson.id}}<br>
+                Name:{{personService.selectedPerson.name}}<br>
+                Age: {{personService.selectedPerson.age}}<br>
+
+
+
+
+            </script>
+
+            <script type = "text/ng-template" id = "newPerson.html">
+                <h2> Create a person </h2>
+             <form>
+                        Enter name: <br>
+                        <input class="form-control" type="text" ng-model='newPersonName'><br>
+                        Enter ID:<br>
+                        <input type="number" class="form-control" ng-model="newPersonId"><br>
+                        Enter age:<br>
+                        <input type="number" class="form-control" ng-model="newPersonAge"><br>
+            <button class="btn-primary form-control" ng-click="createNewPerson(newPersonName, newPersonId, newPersonAge)" >Create person</button><br>
+               
+                    </form>
+                    
+
+            </script>
+        </div>
+
+        <script>
+
+        </script>
+
+    </body>
+</html>
